@@ -1,0 +1,23 @@
+.task {
+    background: #f4f4f4;
+    margin: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    display: flex;
+    
+    
+  }
+  
+  .task.done {
+    border-left: 10px solid green;
+  }
+  .task.notdone {
+    border-left: 10px solid white;
+  }
+  
+  .task h2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  

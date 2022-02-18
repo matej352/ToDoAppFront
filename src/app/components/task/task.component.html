@@ -1,0 +1,42 @@
+<div *ngIf="!wantUpdate" class="task" [ngClass]="{done : task.markAsDone, notdone: !task.markAsDone}">
+  <div style="flex-basis: 90%;
+    flex-grow: 1;">
+    <h2>{{task.title}}</h2>
+    <div>{{task.text}}</div>
+    <div style="padding-left: 20px;">{{task.creationTime}}</div>
+  </div>
+
+
+  <div style="margin-left: 10px; flex-basis: 10%;
+    flex-grow: 1;">
+    <fa-icon (click)="startEdit()" [icon]="faPen" style="padding-right: 10px;"></fa-icon>
+    <fa-icon (click)="marked(task)" [icon]="faCheck" style="padding-right: 10px;"></fa-icon>
+    <fa-icon (click)="clicked(task.id)" [ngStyle]="{'color': 'red'}" [icon]="faTrash"></fa-icon>
+  </div>
+</div>
+
+<div *ngIf="wantUpdate" class="task" [ngClass]="{done : task.markAsDone, notdone: !task.markAsDone}">
+    <div style="flex-basis: 95%;
+      flex-grow: 1;">
+
+
+      <form #form="ngForm"  (ngSubmit)="onSubmit(form)">
+        <div class="form-control">
+          <label for="title">Naslov</label>
+          
+          <input  name="title"    [ngModel] = "task.title" id="title" value="{{task.title}}">
+        </div>
+  
+        <div class="form-control">
+          <label for="title">Opis</label>
+          
+          <textarea type="textarea" name="text" [ngModel] = "task.text" id="text" value="{{task.text}}"></textarea>
+        </div>
+        <input type="submit" value="Spremi" class="btn btn-block">
+  
+       </form>
+    </div>
+  
+  
+    
+  </div>

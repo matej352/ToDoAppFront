@@ -1,0 +1,14 @@
+<div class="container">
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-control">
+      <label for="title"></label>
+      <input type="text" name="title" [(ngModel)] = "title" id ="title" placeholder="Naslov">
+    </div>
+    <div class="form-control">
+      <label for="text"></label>
+      <textarea type="textarea" name="text" [(ngModel)] = "text" id = "text" placeholder="Opis" style="height: 100px;"></textarea>
+    </div>
+    <input type="submit" value="Spremi zadatak" class="btn btn-block">
+
+  </form>
+</div>
