@@ -14,6 +14,8 @@ services:
       - 4200:4200 
     networks:
       - shared-network-back-front
+    depends_on:
+      - todoappback
 
   todoappback:
     container_name: backend
@@ -28,8 +30,7 @@ services:
       - 80:80 
     networks:
       - shared-network-back-front
-    depends_on:
-      - todoappfront
+   
 
 networks:
   shared-network-back-front:
