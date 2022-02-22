@@ -35,7 +35,10 @@ export class TasksComponent implements OnInit {
   }
 
   addTask(obj: object) {
-   this.taskService.createTask(obj).subscribe(t => this.tasks.unshift(t));
+   this.taskService.createTask(obj).subscribe(t => {
+     this.tasks.unshift(t);
+     this.uiService.changeShowTaskAdd();
+  });
   }
 
   updateTask(task: Task) {

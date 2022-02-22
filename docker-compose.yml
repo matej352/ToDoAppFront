@@ -2,11 +2,34 @@ version: '3.4'
 
 services:
   todoappfront:
-    image: todoappfront
+    container_name: frontend
+    restart: unless-stopped
+    image: frontend
     build:
       context: .
       dockerfile: ./Dockerfile
     environment:
       NODE_ENV: production
     ports:
-      - 4200:4200
+      - 4200:4200 
+    networks:
+      - shared-network-back-front
+
+  todoappback:
+    container_name: backend
+    restart: unless-stopped
+    image: backend
+    build:
+      context: ./ToDoAppBack
+      dockerfile: Dockerfile
+    environment:
+      NODE_ENV: production
+    ports:
+      - 80:80 
+    networks:
+      - shared-network-back-front
+    depends_on:
+      - todoappfront
+
+networks:
+  shared-network-back-front:
