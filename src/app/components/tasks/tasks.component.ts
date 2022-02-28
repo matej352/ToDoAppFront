@@ -17,7 +17,7 @@ export class TasksComponent implements OnInit {
   flag:boolean = false;
   subscription!: Subscription;
 
-  constructor(private taskService: TaskService, private uiService: UiService) { //servis ubacili u konstruktor komponente
+  constructor(private taskService: TaskService, private uiService: UiService) { //servis ubacili u konstruktor komponente (DI)
         this.subscription = uiService.onChange().subscribe(boolValue => this.flag = boolValue);
    }   
 

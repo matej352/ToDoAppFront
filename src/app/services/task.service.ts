@@ -11,7 +11,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 export class TaskService {
 
 
-  private restApiUrl = "http://localhost:80/task";   //ovdje treba ić environment varijabla, ovako url namješten za docker i docker-compose
+  private restApiUrl = "https://localhost:44347/task";   //ovdje treba ić environment varijabla, ovako url namješten za docker i docker-compose -> :80 i http
 
   constructor(private http: HttpClient) { }
 
