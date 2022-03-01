@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -14,6 +15,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using ToDoApp.Models;
 using ToDoApp.Repository;
 
 
@@ -32,6 +34,10 @@ namespace ToDoApp
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddDbContext<TodoappdbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("toDoAppDb")),
+              ServiceLifetime.Transient);
+
+           
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAll", p =>
@@ -50,9 +56,9 @@ namespace ToDoApp
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ToDoApp", Version = "v1" });
                 
             });
-            
 
-            services.AddSingleton<ITasksRepository, TasksRepository>();
+            
+            services.AddTransient<ITasksRepository, TasksRepository>();  // .AddSingleton neće moći sa db contextom
 
            
             

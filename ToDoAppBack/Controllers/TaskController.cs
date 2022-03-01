@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -74,7 +74,7 @@ namespace ToDoApp.Controllers
         [HttpPost]
         public async Task<ActionResult<TaskDTO>> CreateTask([FromBody] CreateTaskDTO task)
         {
-            Guid idd = await repository.save(task);
+            Guid idd = await repository.save(task); //ovo prošlo
             TaskToDo taskInRepo = (await repository.findById(idd)).Value;
             
            
@@ -95,7 +95,7 @@ namespace ToDoApp.Controllers
             {
                 return Problem(statusCode: StatusCodes.Status400BadRequest, detail: $"Different ids {id} vs {task.Id}");
             }
-            var taskInRepo = repository.findById(id);
+            var taskInRepo = await repository.findById(id);
             if (taskInRepo == null)
             {
                 return Problem(statusCode: StatusCodes.Status404NotFound, detail: $"Invalid id = {id}");
@@ -112,7 +112,8 @@ namespace ToDoApp.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteTask(Guid id)
         {
-            if (repository.findById(id).Equals(null)) {
+            var task = await repository.findById(id);
+            if (task.Equals(null)) {
                 return Problem(statusCode: StatusCodes.Status404NotFound, detail: $"Invalid id = {id}");
             }
 
