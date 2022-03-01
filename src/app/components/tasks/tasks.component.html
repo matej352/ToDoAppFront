@@ -1,3 +1,3 @@
 <app-task-add *ngIf="flag" (onAdd)="addTask($event)"></app-task-add>
-<app-task *ngFor="let task of tasks" [task]="task" (onDelete)="deleteTask(task.id)" (onMark)="markTask(task)"
+<app-task *ngFor="let task of (tasks$ | async)" [task]="task" (onDelete)="deleteTask(task.id)" (onMark)="markTask(task)"
   (onUpdate)="updateTask(task)"></app-task>

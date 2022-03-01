@@ -26,10 +26,26 @@ services:
       dockerfile: Dockerfile
     environment:
       NODE_ENV: production
+    depends_on:
+      - ms-sql-server
     ports:
-      - 80:80 
+      - 800:800
     networks:
       - shared-network-back-front
+
+  ms-sql-server:
+    container_name: database
+    image: mcr.microsoft.com/mssql/server
+    ports:
+      - 1421:1421
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "Bazepodataka123!"
+      MSSQL_PID: "Express"
+    networks:
+      - shared-network-back-front
+
+
    
 
 networks:
